@@ -1,25 +1,28 @@
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class DecisionTree {
-    private String version;
-    private String question;
-    private DecisionTreeAnswer[] answers;
+    private JSONObject decisionTree;
 
-    // Constructor
-    public DecisionTree(String version, String question, DecisionTreeAnswer[] answers) {
-        this.version = version;
-        this.question = question;
-        this.answers = answers;
+    public DecisionTree(String json) throws JSONException {
+        decisionTree = new JSONObject(json);
     }
 
-    // Getters
-    public String getVersion() {
-        return version;
+    public String getQuestion() throws JSONException {
+        return decisionTree.getString("question");
     }
 
-    public String getQuestion() {
-        return question;
+    public JSONArray getAnswers() throws JSONException {
+        return decisionTree.getJSONArray("answers");
     }
 
-    public DecisionTreeAnswer[] getAnswers() {
-        return answers;
+    public JSONObject getNextNode(int answerIndex) throws JSONException {
+        JSONArray answers = getAnswers();
+        return answers.getJSONObject(answerIndex).getJSONObject("nextNode");
+    }
+
+    public String getResult() throws JSONException {
+        return decisionTree.getJSONObject("nextNode").getString("result");
     }
 }
