@@ -1,37 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingLeft="16dp"
-    android:paddingTop="16dp"
-    android:paddingRight="16dp"
-    android:paddingBottom="16dp">
+    android:padding="16dp">
 
     <TextView
         android:id="@+id/questionTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:textSize="24sp"
-        android:textAlignment="center"
-        android:text="Question" />
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="16dp"
+        tools:text="Question goes here" />
 
-    <Button
-        android:id="@+id/yesButton"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/answerButtonLayout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/questionTextView"
-        android:layout_marginTop="16dp"
-        android:text="Yes" />
-
-    <Button
-        android:id="@+id/noButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/questionTextView"
-        android:layout_marginTop="16dp"
-        android:layout_toRightOf="@id/yesButton"
-        android:layout_marginLeft="16dp"
-        android:text="No" />
+        android:orientation="vertical"
+        android:layout_below="@id/questionTextView" />
 
 </RelativeLayout>
