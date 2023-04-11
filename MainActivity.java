@@ -1,26 +1,20 @@
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.res.AssetManager;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.nio.charset.StandardCharsets;
-
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private TextView questionTextView;
-    private Button yesButton;
-    private Button noButton;
-
-    private DecisionTree currentDecisionTree;
+    private LinearLayout answerButtonLayout;
+    private DecisionTree decisionTree;
+    private int currentQuestionIndex = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,97 +23,76 @@ public class MainActivity extends AppCompatActivity {
 
         // Initialize UI elements
         questionTextView = findViewById(R.id.questionTextView);
-        yesButton = findViewById(R.id.yesButton);
-        noButton = findViewById(R.id.noButton);
+        answerButtonLayout = findViewById(R.id.answerButtonLayout);
 
-        // Load JSON data from assets folder
-        String json = loadJSONFromAsset("decision_tree.json");
-
-        // Parse JSON data into DecisionTree object
+        // Load decision tree from JSON file
+        String json = loadDecisionTreeFromJsonFile();
         try {
-            JSONObject jsonObject = new JSONObject(json);
-            currentDecisionTree = parseDecisionTree(jsonObject);
+            decisionTree = new DecisionTree(json);
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
-        // Set initial question
-        setQuestion(currentDecisionTree.getQuestion());
-
-        // Set click listeners for answer buttons
-        yesButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                handleAnswerButtonClick(true);
-            }
-        });
-
-        noButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                handleAnswerButtonClick(false);
-            }
-        });
+        // Display initial question
+        displayQuestion();
     }
 
-    private DecisionTree parseDecisionTree(JSONObject jsonObject) throws JSONException {
-        String version = jsonObject.getString("version");
-        String question = jsonObject.getString("question");
-
-        DecisionTree decisionTree = new DecisionTree(version, question);
-
-        if (jsonObject.has("result")) {
-            String result = jsonObject.getString("result");
-            decisionTree.setResult(result);
-        } else if (jsonObject.has("nextNode")) {
-            JSONObject nextNodeObject = jsonObject.getJSONObject("nextNode");
-            DecisionTree yesNode = parseDecisionTree(nextNodeObject.getJSONObject("yesNode"));
-            DecisionTree noNode = parseDecisionTree(nextNodeObject.getJSONObject("noNode"));
-            decisionTree.setNextNode(new DecisionNode(yesNode, noNode));
-        }
-
-        return decisionTree;
-    }
-
-    private void setQuestion(String question) {
-        questionTextView.setText(question);
-    }
-
-    private void handleAnswerButtonClick(boolean isYes) {
-        if (currentDecisionTree.getNextNode() != null) {
-            // Set next question or display result
-            if (isYes) {
-                currentDecisionTree = currentDecisionTree.getNextNode().getYesNode();
-            } else {
-                currentDecisionTree = currentDecisionTree.getNextNode().getNoNode();
-            }
-
-            if (currentDecisionTree.getResult() != null) {
-                // Display result
-                String result = currentDecisionTree.getResult();
-                setQuestion(result);
-                // Perform any other actions based on the result
-            } else {
-                // Set next question
-                setQuestion(currentDecisionTree.getQuestion());
-            }
-        }
-    }
-
-    private String loadJSONFromAsset(String fileName) {
-        String json;
+    private String loadDecisionTreeFromJsonFile() {
+        InputStream inputStream = getResources().openRawResource(R.raw.decision_tree);
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+        StringBuilder stringBuilder = new StringBuilder();
+        String line;
         try {
-            AssetManager assetManager = getAssets();
-            InputStream inputStream = assetManager.open(fileName);
-            int size = inputStream.available();
-            byte[] buffer = new byte[size];
-            inputStream.read(buffer);
-            inputStream.close();
-            json = new String(buffer, StandardCharsets.UTF_8);
+            while ((line = bufferedReader.readLine()) != null) {
+                stringBuilder.append(line);
+            }
+             bufferedReader.close();
         } catch (IOException e) {
+             e.printStackTrace();
+         }
+         return stringBuilder.toString();
+    }
+
+    private void displayQuestion() {
+        try {
+            // Display current question
+            questionTextView.setText(decisionTree.getQuestion());
+
+            // Clear existing answer buttons
+            answerButtonLayout.removeAllViews();
+
+            // Create answer buttons dynamically
+            JSONArray answers = decisionTree.getAnswers();
+            for (int i = 0; i < answers.length(); i++) {
+                Button answerButton = new Button(this);
+                answerButton.setText(answers.getJSONObject(i).getString("answer"));
+                answerButton.setTag(i);
+                answerButton.setOnClickListener(this);
+                answerButtonLayout.addView(answerButton);
+            }
+        } catch (JSONException e) {
             e.printStackTrace();
-            return null;
         }
-        return json;
+    }
+
+    @Override
+    public void onClick(View view) {
+        try {
+            int answerIndex = (int) view.getTag();
+            JSONObject nextNode = decisionTree.getNextNode(answerIndex);
+            if (nextNode.has("question")) {
+                // If next node has a question, update current question index and display next question
+                currentQuestionIndex++;
+                decisionTree = new DecisionTree(nextNode.toString());
+                displayQuestion();
+            } else if (nextNode.has("result")) {
+                // If next node has a result, display the result
+                String result = nextNode.getString("result");
+                questionTextView.setText(result);
+                answerButtonLayout.removeAllViews();
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 }
