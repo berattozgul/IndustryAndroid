@@ -9,6 +9,11 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private TextView questionTextView;
@@ -46,11 +51,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             while ((line = bufferedReader.readLine()) != null) {
                 stringBuilder.append(line);
             }
-             bufferedReader.close();
+            bufferedReader.close();
         } catch (IOException e) {
-             e.printStackTrace();
-         }
-         return stringBuilder.toString();
+            e.printStackTrace();
+        }
+        return stringBuilder.toString();
     }
 
     private void displayQuestion() {
@@ -70,29 +75,42 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 answerButton.setOnClickListener(this);
                 answerButtonLayout.addView(answerButton);
             }
+
+            // Add "Back" button if not at the root node
+            if (currentQuestionIndex > 0) {
+                Button backButton = new Button(this);
+                backButton.setText("Back");
+                backButton.setTag(-1);
+                backButton.setOnClickListener(this);
+                answerButtonLayout.addView(backButton);
+            }
         } catch (JSONException e) {
             e.printStackTrace();
         }
     }
 
     @Override
-    public void onClick(View view) {
-        try {
-            int answerIndex = (int) view.getTag();
-            JSONObject nextNode = decisionTree.getNextNode(answerIndex);
-            if (nextNode.has("question")) {
-                // If next node has a question, update current question index and display next question
-                currentQuestionIndex++;
-                decisionTree = new DecisionTree(nextNode.toString());
-                displayQuestion();
-            } else if (nextNode.has("result")) {
-                // If next node has a result, display the result
-                String result = nextNode.getString("result");
-                questionTextView.setText(result);
-                answerButtonLayout.removeAllViews();
+    public void onClick(View v) {
+        int answerIndex = (int) v.getTag();
+        if (answerIndex == -1) {
+            // "Back" button clicked
+            if (currentQuestionIndex > 0) {
+                currentQuestionIndex--; // Decrement current question index
+                decisionTree = decisionTree.getParent(); // Set parent node as current decision tree
+                displayQuestion(); // Display previous question
             }
-        } catch (JSONException e) {
-            e.printStackTrace();
+        } else {
+            // Answer button clicked
+            try {
+                DecisionTree child = decisionTree.getChild(answerIndex); // Get child node based on selected answer
+                if (child != null) {
+                    currentQuestionIndex++; // Increment current question index
+                    decisionTree = child; // Set child node as current decision tree
+                    displayQuestion(); // Display next question
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
         }
     }
 }
