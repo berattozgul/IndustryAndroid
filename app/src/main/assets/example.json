@@ -1,48 +1,41 @@
 {
-  "version": "1.0",
-  "question": "Is it a mammal?",
+  "version": "1.0.0.1 beta",
+  "question": "What aspect of computer engineering are you interested in?",
   "answers": [
     {
       "id": "1",
-      "answer": "Yes",
+      "answer": "Hardware",
       "nextNode": {
-        "question": "Does it have fur?",
+        "question": "Do you have experience with digital logic design?",
         "answers": [
           {
             "id": "1.1",
             "answer": "Yes",
             "nextNode": {
-              "result": "It's a dog."
+              "question": "What type of digital logic gates are used to implement a half-adder circuit?",
+              "answers": [
+                {
+                  "id": "1.1.1",
+                  "answer": "AND and XOR",
+                  "nextNode": {
+                    "result": "Correct! AND and XOR gates are used to implement a half-adder circuit."
+                  }
+                },
+                {
+                  "id": "1.1.2",
+                  "answer": "OR and NOT",
+                  "nextNode": {
+                    "result": "Incorrect. The correct answer is AND and XOR gates."
+                  }
+                }
+              ]
             }
           },
           {
             "id": "1.2",
             "answer": "No",
             "nextNode": {
-              "result": "It's a human."
-            }
-          },
-          {
-            "id": "1.3",
-            "answer": "Not sure",
-            "nextNode": {
-              "question": "Does it lay eggs?",
-              "answers": [
-                {
-                  "id": "1.3.1",
-                  "answer": "Yes",
-                  "nextNode": {
-                    "result": "It's a monotreme, such as a platypus."
-                  }
-                },
-                {
-                  "id": "1.3.2",
-                  "answer": "No",
-                  "nextNode": {
-                    "result": "It's a mammal, but more information is needed to determine the specific species."
-                  }
-                }
-              ]
+              "result": "That's okay! Digital logic design is an important concept in computer hardware engineering. You can learn more about it through online resources or courses."
             }
           }
         ]
@@ -50,38 +43,52 @@
     },
     {
       "id": "2",
-      "answer": "No",
+      "answer": "Software",
       "nextNode": {
-        "question": "Is it a bird?",
+        "question": "What programming language are you interested in learning?",
         "answers": [
           {
             "id": "2.1",
-            "answer": "Yes",
+            "answer": "Python",
             "nextNode": {
-              "result": "It's a pigeon."
+              "result": "Great choice! Python is a popular programming language in the field of computer engineering, especially for tasks such as data analysis, machine learning, and scientific computing."
             }
           },
           {
             "id": "2.2",
+            "answer": "C++",
+            "nextNode": {
+              "result": "Excellent! C++ is a powerful and widely used programming language in computer engineering, particularly for developing system software, embedded systems, and game development."
+            }
+          },
+          {
+            "id": "2.3",
+            "answer": "Java",
+            "nextNode": {
+              "result": "Nice! Java is a popular programming language in computer engineering, especially for developing applications on the Java Virtual Machine (JVM) and for Android app development."
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "3",
+      "answer": "Networking",
+      "nextNode": {
+        "question": "Do you know the OSI model?",
+        "answers": [
+          {
+            "id": "3.1",
+            "answer": "Yes",
+            "nextNode": {
+              "result": "Good job! The OSI (Open Systems Interconnection) model is a conceptual framework used in computer networking to understand and organize the various layers involved in network communication."
+            }
+          },
+          {
+            "id": "3.2",
             "answer": "No",
             "nextNode": {
-              "question": "Is it a reptile?",
-              "answers": [
-                {
-                  "id": "2.2.1",
-                  "answer": "Yes",
-                  "nextNode": {
-                    "result": "It's a snake."
-                  }
-                },
-                {
-                  "id": "2.2.2",
-                  "answer": "No",
-                  "nextNode": {
-                    "result": "It's a fish."
-                  }
-                }
-              ]
+              "result": "No worries! The OSI model is a common topic in networking, and you can easily learn more about it through online resources or courses."
             }
           }
         ]
