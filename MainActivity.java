@@ -43,20 +43,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private String loadDecisionTreeFromJsonFile() {
-        InputStream inputStream = getResources().openRawResource(R.raw.decision_tree);
-        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
-        StringBuilder stringBuilder = new StringBuilder();
-        String line;
-        try {
-            while ((line = bufferedReader.readLine()) != null) {
-                stringBuilder.append(line);
-            }
-            bufferedReader.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return stringBuilder.toString();
+    String json = null;
+    try {
+        // Read JSON file from assets directory
+        InputStream inputStream = getAssets().open("decision_tree.json");
+        int size = inputStream.available();
+        byte[] buffer = new byte[size];
+        inputStream.read(buffer);
+        inputStream.close();
+        json = new String(buffer, "UTF-8");
+    } catch (IOException e) {
+        e.printStackTrace();
     }
+    return json;
+}
+
 
     private void displayQuestion() {
         try {
