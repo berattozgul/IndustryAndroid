@@ -3,26 +3,45 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class DecisionTree {
-    private JSONObject decisionTree;
 
-    public DecisionTree(String json) throws JSONException {
-        decisionTree = new JSONObject(json);
+    private String question;
+    private JSONArray answers;
+    private DecisionTree parent;
+    private DecisionTree[] children;
+
+    public DecisionTree(JSONObject node) throws JSONException {
+        this.question = node.getString("question");
+        this.answers = node.getJSONArray("answers");
+        this.parent = null;
+        this.children = new DecisionTree[answers.length()];
+        for (int i = 0; i < answers.length(); i++) {
+            JSONObject childNode = answers.getJSONObject(i).getJSONObject("child");
+            children[i] = new DecisionTree(childNode);
+            children[i].setParent(this);
+        }
     }
 
-    public String getQuestion() throws JSONException {
-        return decisionTree.getString("question");
+    public String getQuestion() {
+        return question;
     }
 
-    public JSONArray getAnswers() throws JSONException {
-        return decisionTree.getJSONArray("answers");
+    public JSONArray getAnswers() {
+        return answers;
     }
 
-    public JSONObject getNextNode(int answerIndex) throws JSONException {
-        JSONArray answers = getAnswers();
-        return answers.getJSONObject(answerIndex).getJSONObject("nextNode");
+    public DecisionTree getParent() {
+        return parent;
     }
 
-    public String getResult() throws JSONException {
-        return decisionTree.getJSONObject("nextNode").getString("result");
+    public void setParent(DecisionTree parent) {
+        this.parent = parent;
+    }
+
+    public DecisionTree getChild(int index) {
+        if (index >= 0 && index < children.length) {
+            return children[index];
+        } else {
+            return null;
+        }
     }
 }
