@@ -1,0 +1,68 @@
+{
+  "version": "1.0",
+  "question": "Is it a mammal?",
+  "answers": [
+    {
+      "id": "1",
+      "answer": "Yes",
+      "nextNode": {
+        "question": "Does it have fur?",
+        "answers": [
+          {
+            "id": "1.1",
+            "answer": "Yes",
+            "nextNode": {
+              "result": "It's a dog."
+            }
+          },
+          {
+            "id": "1.2",
+            "answer": "No",
+            "nextNode": {
+              "result": "It's a human."
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "2",
+      "answer": "No",
+      "nextNode": {
+        "question": "Is it a bird?",
+        "answers": [
+          {
+            "id": "2.1",
+            "answer": "Yes",
+            "nextNode": {
+              "result": "It's a pigeon."
+            }
+          },
+          {
+            "id": "2.2",
+            "answer": "No",
+            "nextNode": {
+              "question": "Is it a reptile?",
+              "answers": [
+                {
+                  "id": "2.2.1",
+                  "answer": "Yes",
+                  "nextNode": {
+                    "result": "It's a snake."
+                  }
+                },
+                {
+                  "id": "2.2.2",
+                  "answer": "No",
+                  "nextNode": {
+                    "result": "It's a fish."
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  ]
+}
