@@ -4,4 +4,7 @@
 - [ ] Make a dynamically update the JSON file(version update)
 - [x] allow the user to go back to the previous question
 - [ ] Make a good ui
-- [ ] Try testing
+- [x] add firebase to chat admins and get help
+- [x] add login and register activities
+- [ ] Block register without admin permission.
+- [ ] chat with admin or customer care assistant
