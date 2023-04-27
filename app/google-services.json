@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "592676289244",
+    "project_id": "industryandroid-e140c",
+    "storage_bucket": "industryandroid-e140c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:592676289244:android:57ba89ea688d8ecadbd219",
+        "android_client_info": {
+          "package_name": "com.kut.industryandroid"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "592676289244-hqbc62b13h9um4d7nf0viumk60j4v7ek.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDfXWJrUDLq1IEt_jbRCDz5_bwYiyPQZts"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "592676289244-hqbc62b13h9um4d7nf0viumk60j4v7ek.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

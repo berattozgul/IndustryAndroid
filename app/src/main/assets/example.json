@@ -1,5 +1,5 @@
 {
-  "version": "1.0.0.1 beta",
+  "version": "1.0.0.2 beta",
   "question": "What aspect of computer engineering are you interested in?",
   "answers": [
     {
@@ -35,7 +35,23 @@
             "id": "1.2",
             "answer": "No",
             "nextNode": {
-              "result": "That's okay! Digital logic design is an important concept in computer hardware engineering. You can learn more about it through online resources or courses."
+              "question": "What is the purpose of a multiplexer in digital logic design?",
+              "answers": [
+                {
+                  "id": "1.2.1",
+                  "answer": "To select one of several input signals and route it to a single output",
+                  "nextNode": {
+                    "result": "That's right! A multiplexer is a combinational circuit that selects one of several input signals and routes it to a single output based on control signals."
+                  }
+                },
+                {
+                  "id": "1.2.2",
+                  "answer": "To perform arithmetic operations on binary numbers",
+                  "nextNode": {
+                    "result": "Incorrect. The correct answer is that a multiplexer is used to select one of several input signals and route it to a single output."
+                  }
+                }
+              ]
             }
           }
         ]
@@ -51,21 +67,46 @@
             "id": "2.1",
             "answer": "Python",
             "nextNode": {
-              "result": "Great choice! Python is a popular programming language in the field of computer engineering, especially for tasks such as data analysis, machine learning, and scientific computing."
+              "question": "What are some common libraries or frameworks used in Python for machine learning?",
+              "answers": [
+                {
+                  "id": "2.1.1",
+                  "answer": "Scikit-learn and TensorFlow",
+                  "nextNode": {
+                    "result": "Correct! Scikit-learn and TensorFlow are popular libraries in Python for machine learning tasks."
+                  }
+                },
+                {
+                  "id": "2.1.2",
+                  "answer": "NumPy and Matplotlib",
+                  "nextNode": {
+                    "result": "Incorrect. While NumPy and Matplotlib are useful libraries in Python, they are not specifically used for machine learning. The correct answer is Scikit-learn and TensorFlow."
+                  }
+                }
+              ]
             }
           },
           {
             "id": "2.2",
             "answer": "C++",
             "nextNode": {
-              "result": "Excellent! C++ is a powerful and widely used programming language in computer engineering, particularly for developing system software, embedded systems, and game development."
-            }
-          },
-          {
-            "id": "2.3",
-            "answer": "Java",
-            "nextNode": {
-              "result": "Nice! Java is a popular programming language in computer engineering, especially for developing applications on the Java Virtual Machine (JVM) and for Android app development."
+              "question": "What are some advantages of using C++ in embedded systems development?",
+              "answers": [
+                {
+                  "id": "2.2.1",
+                  "answer": "Efficient memory management and low-level hardware access",
+                  "nextNode": {
+                    "result": "That's right! C++ is known for its efficient memory management and low-level hardware access capabilities, making it a popular choice for embedded systems development."
+                  }
+                },
+                {
+                  "id": "2.2.2",
+                  "answer": "High-level abstraction and dynamic typing",
+                  "nextNode": {
+                    "result": "Incorrect. C++ is actually known for its low-level hardware access and efficient memory management capabilities, not high-level abstraction and dynamic typing. The correct answer is efficient memory management and low-level hardware access."
+                  }
+                }
+              ]
             }
           }
         ]
@@ -75,20 +116,52 @@
       "id": "3",
       "answer": "Networking",
       "nextNode": {
-        "question": "Do you know the OSI model?",
+        "question": "What is a VLAN?",
         "answers": [
           {
             "id": "3.1",
-            "answer": "Yes",
+            "answer": "Virtual Local Area Network",
             "nextNode": {
-              "result": "Good job! The OSI (Open Systems Interconnection) model is a conceptual framework used in computer networking to understand and organize the various layers involved in network communication."
+              "question": "What is the purpose of a VLAN?",
+              "answers": [
+                {
+                  "id": "3.1.1",
+                  "answer": "To logically segment a physical LAN into multiple virtual LANs",
+                  "nextNode": {
+                    "result": "Correct! A VLAN is used to logically segment a physical LAN into multiple virtual LANs, allowing for improved network performance, security, and management."
+                  }
+                },
+                {
+                  "id": "3.1.2",
+                  "answer": "To establish a direct physical connection between two remote LANs",
+                  "nextNode": {
+                    "result": "Incorrect. The correct answer is that a VLAN is used to logically segment a physical LAN into multiple virtual LANs, not to establish a direct physical connection between two remote LANs."
+                  }
+                }
+              ]
             }
           },
           {
             "id": "3.2",
-            "answer": "No",
+            "answer": "Virtual Local Access Network",
             "nextNode": {
-              "result": "No worries! The OSI model is a common topic in networking, and you can easily learn more about it through online resources or courses."
+              "question": "What is the main function of a switch in a computer network?",
+              "answers": [
+                {
+                  "id": "3.2.1",
+                  "answer": "To forward data packets between devices on the same LAN",
+                  "nextNode": {
+                    "result": "That's right! A switch is used to forward data packets between devices on the same LAN, based on their MAC addresses, allowing for efficient communication within a local network."
+                  }
+                },
+                {
+                  "id": "3.2.2",
+                  "answer": "To connect two or more remote LANs",
+                  "nextNode": {
+                    "result": "Incorrect. The correct answer is that a switch is used to forward data packets between devices on the same LAN, not to connect remote LANs."
+                  }
+                }
+              ]
             }
           }
         ]
@@ -96,3 +169,4 @@
     }
   ]
 }
+

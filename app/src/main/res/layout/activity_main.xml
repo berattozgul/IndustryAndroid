@@ -26,11 +26,23 @@
         android:textColor="#2012AE"
         tools:text="Version" />
 
+    <TextView
+        android:id="@+id/getHelpText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/versionTextView"
+        android:layout_centerHorizontal="true"
+        android:clickable="true"
+        android:text="Do you have a problem?\n Chat with customer care"
+        android:textColor="#2012AE"
+        android:textStyle="italic" />
+
     <LinearLayout
         android:id="@+id/answerButtonLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/questionTextView"
         android:orientation="vertical" />
+
 
 </RelativeLayout>

@@ -3,11 +3,15 @@ package com.kut.industryandroid;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -15,13 +19,15 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private TextView questionTextView;
     private TextView versionTextView;
+    private TextView getHelpTexView;
     private LinearLayout answerButtonLayout;
     private DecisionTree decisionTree;
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
+    DatabaseReference rootRef = database.getReference("Users");
     private int currentQuestionIndex = 0;
 
     @Override
@@ -33,6 +39,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         questionTextView = findViewById(R.id.questionTextView);
         answerButtonLayout = findViewById(R.id.answerButtonLayout);
         versionTextView = findViewById(R.id.versionTextView);
+        getHelpTexView = findViewById(R.id.getHelpText);
 
         String json = loadDecisionTreeFromJsonFile();
 
@@ -44,9 +51,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             throw new RuntimeException(e);
         }
         // Display the version for the first time
-        versionTextView.setText("Version="+decisionTree.getVersion());
+        versionTextView.setText("Version=" + decisionTree.getVersion());
         // Display initial question
         displayQuestion();
+        getHelpTexView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, GetHelpActivity.class);
+                startActivity(intent);
+
+            }
+        });
     }
 
     private String loadDecisionTreeFromJsonFile() {
@@ -64,7 +79,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
         return json;
     }
-
 
     private void displayQuestion() {
         if (decisionTree != null) {
