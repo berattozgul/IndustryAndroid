@@ -3,7 +3,11 @@
         <item>Admin</item>
         <item>Customer Care Support</item>
         <item>Manager</item>
-        <item>Guest</item>
+        <item>User</item>
+    </string-array>
+    <string-array name="languages">
+        <item>Turkish</item>
+        <item>English</item>
     </string-array>
     <string name="app_name">IndustryAndroid</string>
     <string name="title_activity_login">LoginActivity</string>

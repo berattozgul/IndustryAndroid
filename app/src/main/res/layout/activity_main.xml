@@ -1,48 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
     android:padding="16dp"
-    tools:context=".MainActivity">
+    tools:context=".Views.MainActivity">
 
     <TextView
-        android:id="@+id/questionTextView"
-        android:layout_width="match_parent"
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:textSize="18sp"
+        android:textSize="20sp"
         android:textStyle="bold"
-        tools:text="Question goes here" />
+        android:gravity="center"
+        android:layout_marginBottom="16dp"
+        android:text="Welcome to Industry 4.0 app! I designed this app for documentation of Industry 4.0 mechanics and making decision tree for the errors and maintenance" />
 
-    <TextView
-        android:id="@+id/versionTextView"
+    <Button
+        android:id="@+id/docButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignRight="@id/questionTextView"
-        android:textStyle="italic"
-        android:layout_below="@id/answerButtonLayout"
-        android:textColor="#2012AE"
-        tools:text="Version" />
+        android:text="Documentation"
+        android:layout_marginBottom="16dp"/>
 
-    <TextView
-        android:id="@+id/getHelpText"
+    <Button
+        android:id="@+id/decisionTreeButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/versionTextView"
-        android:layout_centerHorizontal="true"
-        android:clickable="true"
-        android:text="Do you have a problem?\n Chat with customer care"
-        android:textColor="#2012AE"
-        android:textStyle="italic" />
+        android:text="Maintanance and Errors" />
 
-    <LinearLayout
-        android:id="@+id/answerButtonLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/questionTextView"
-        android:orientation="vertical" />
-
-
-</RelativeLayout>
+</LinearLayout>

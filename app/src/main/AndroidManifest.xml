@@ -2,29 +2,58 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/d900235c"
         android:label="@string/app_name"
+        android:screenOrientation="sensorLandscape"
         android:supportsRtl="true"
         android:theme="@style/Theme.IndustryAndroid"
         tools:targetApi="31">
         <activity
-            android:name=".RegisterActivity"
+            android:name=".Views.DocActivity"
             android:exported="false" />
         <activity
-            android:name=".LoginActivity"
+            android:name=".Views.DecisionTreeActivity"
             android:exported="false" />
         <activity
-            android:name=".ChatActivity"
+            android:name=".Views.JSONEditActivity"
             android:exported="false" />
         <activity
-            android:name=".GetHelpActivity"
+            android:name=".Views.RoomSelectActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".Views.RegisterActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Views.LoginActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Views.ChatActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Views.GetHelpActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Views.QrCodeScanActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Views.TitleSelectActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Views.InnerTitleSelectActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Views.ViewerActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Views.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

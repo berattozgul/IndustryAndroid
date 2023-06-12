@@ -4,20 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ChatActivity">
-
+    tools:context=".Views.ChatActivity">
     <ListView
         android:id="@+id/message_list"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:divider="@android:color/transparent"
         android:dividerHeight="0dp"
         android:listSelector="@android:color/transparent"
-        android:paddingLeft="16dp"
-        android:paddingTop="16dp"
-        android:paddingRight="16dp"
         android:paddingBottom="16dp" />
-
     <RelativeLayout
         android:id="@+id/input_layout"
         android:layout_width="match_parent"
@@ -44,6 +39,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:background="?android:attr/selectableItemBackgroundBorderless"
+            android:onClick="sendMessage"
             android:src="@drawable/ic_send" />
     </RelativeLayout>
 </RelativeLayout>
